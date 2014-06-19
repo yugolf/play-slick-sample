@@ -1,0 +1,34 @@
+@(eventUpdateForm: Form[models.form.event.EventUpdateForms], id :Int)(implicit flash: Flash)
+
+@import BootstrapHelper._
+
+@main("EventUpdate") {
+
+  <div class="container">
+    <br>
+    @if(flash.get("success").isDefined){
+      <div class="alert alert-success">
+        @flash.get("success")
+      </div>
+    }
+    @if(eventUpdateForm.errors){
+      <div class="alert alert-danger">
+        There are some errors. please correct them.
+      </div>
+    }
+  </div>
+
+  @helper.form(action = controllers.event.routes.EventUpdate.update(id), 'role -> "form", 'class -> "form-horizontal"){
+    <div class="container">
+      <fieldset>
+        <legend>EventUpdate</legend>
+        @helper.inputText(eventUpdateForm("id"))
+        @helper.inputText(eventUpdateForm("eventId"))
+        @helper.inputText(eventUpdateForm("eventNm"))
+        @helper.inputDate(eventUpdateForm("eventDate"))
+        @helper.inputText(eventUpdateForm("homepage"))
+        <input type="submit" value="Update" class="btn btn-primary">
+      </fieldset>
+    </div>
+  }
+}

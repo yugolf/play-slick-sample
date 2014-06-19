@@ -1,0 +1,34 @@
+@(eventCreateForm: Form[models.form.event.EventCreateForms])(implicit flash: Flash)
+
+@import BootstrapHelper._
+
+@main("EventCreate") {
+
+  <div class="container">
+    <br>
+    @if(flash.get("success").isDefined){
+      <div class="alert alert-success">
+        @flash.get("success")
+      </div>
+    }
+    @if(eventCreateForm.errors){
+      <div class="alert alert-danger">
+        There are some errors. please correct them.
+      </div>
+    }
+  </div>
+
+  @helper.form(action = controllers.event.routes.EventCreate.create(), 'role -> "form", 'class -> "form-horizontal"){
+    <div class="container">
+      <fieldset>
+        <legend>EventCreate</legend>
+        @helper.inputText(eventCreateForm("id"))
+        @helper.inputText(eventCreateForm("eventId"))
+        @helper.inputText(eventCreateForm("eventNm"))
+        @helper.inputDate(eventCreateForm("eventDate"))
+        @helper.inputText(eventCreateForm("homepage"))
+        <div align = "right"><input type="submit" value="Create" class="btn btn-primary"></div>
+      </fieldset>
+    </div>
+  }
+}
